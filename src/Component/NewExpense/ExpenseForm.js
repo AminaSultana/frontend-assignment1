@@ -2,22 +2,51 @@ import React, { useState } from "react";
 import "./ExpenseForm.css";
 
 const ExpenseForm = () => {
-  const [enteredTitle, setEnteredTitle] = useState("");
+  const [userInput, setUserInput] = useState({
+    enteredTitle: "",
+    enteredAmount: "",
+    enteredDate: "",
+  });
+
   const titleChangeHandler = (e) => {
-    console.log(e.target.value);
-    setEnteredTitle(e.target.value);
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredTitle: e.target.value,
+      };
+    });
   };
 
-  const [enteredAmount, setEnteredAmount] = useState("");
   const numberChangeHandler = (e) => {
-    console.log(e.target.value);
-    setEnteredAmount(e.target.value);
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredAmount: e.target.value,
+      };
+    });
   };
 
-  const [enteredDate, setEnteredDate] = useState("");
   const dateChangeHandler = (e) => {
-    setEnteredDate(e.target.value);
+    setUserInput((prevState) => {
+      return {
+        ...prevState,
+        enteredDate: e.target.value,
+      };
+    });
   };
+
+  const submitForm = (e)=>{
+    e.preventDefault()
+    const obj = {
+      title1: userInput.enteredTitle,
+      amount1: userInput.enteredAmount,
+      date1: userInput.enteredDate
+    }
+    console.log(obj.title1);
+    console.log(obj.amount1);
+    console.log(obj.date1);
+
+  }
 
   return (
     <form>
@@ -34,7 +63,7 @@ const ExpenseForm = () => {
           <label>Date</label>
           <input type="Date" onChange={dateChangeHandler} />
         </div>
-        <button type="submit">Add Expense</button>
+        <button type="submit" onClick={submitForm}>Add Expense</button>
       </div>
     </form>
   );
