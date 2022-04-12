@@ -37,14 +37,10 @@ const ExpenseForm = () => {
 
   const submitForm = (e)=>{
     e.preventDefault()
-    const obj = {
-      title1: userInput.enteredTitle,
-      amount1: userInput.enteredAmount,
-      date1: userInput.enteredDate
-    }
-    console.log(obj.title1);
-    console.log(obj.amount1);
-    console.log(obj.date1);
+    
+    console.log(userInput.enteredTitle);
+    console.log(userInput.enteredAmount);
+    console.log(userInput.enteredDate);
 
   }
 
