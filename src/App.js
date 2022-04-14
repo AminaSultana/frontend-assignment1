@@ -3,6 +3,7 @@ import Card from "./Component/UI/Card";
 import ExpenseItem from "./Component/Expenses/ExpenseItem";
 import "./Component/Expenses/ExpenseItem.css";
 import NewExpense from "./Component/NewExpense/NewExpense";
+import ExpenseFilter from "./Component/Expenses/ExpenseFilter";
 
 const expenses = [
   {
@@ -36,6 +37,12 @@ const expenses = [
 ];
 
 const App = () => {
+  const [filterYear, setFilterYear] = useState("2020");
+  const filterChangeHandler = (selectedYear) => {
+    setFilterYear(selectedYear);
+    filteredItems(selectedYear);
+  };
+
   const [expense, setExpenses] = useState(expenses);
   const addExpenseHandler = (data) => {
     console.log(data);
@@ -44,10 +51,21 @@ const App = () => {
     });
   };
 
+  const filteredItems = (selectedYear) => {
+    const filterArrayItems = expense.filter( arr => {
+      return arr.date.getFullYear().toString() === selectedYear;
+    });
+    setExpenses(filterArrayItems);
+  };
+
   return (
     <div>
       <h2>Let's get started!</h2>
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
+      <ExpenseFilter
+        selected={filterYear}
+        onChangeFilter={filterChangeHandler}
+      ></ExpenseFilter>
       {expense.map((item) => {
         return (
           <div>
